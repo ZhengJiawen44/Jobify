@@ -1,9 +1,9 @@
 To setup on your local device run the command:
-```bash
+```sh
 npm run setup-project
 ```
 
 to start the server:
-```bash
+```sh
 npm run dev
 ```
