@@ -1,0 +1,50 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  HomeLayout,
+  Landing,
+  Register,
+  Login,
+  DashboardLayout,
+  Error,
+  AddJob,
+  AllJobs,
+  Stats,
+  Profile,
+  Admin,
+} from "./pages";
+function checkDefaultTheme() {
+  let theme = localStorage.getItem("theme") === "true";
+  document.body.classList.toggle("dark-theme", theme);
+  return theme;
+}
+checkDefaultTheme();
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomeLayout />,
+    errorElement: <Error />,
+    children: [
+      { index: true, element: <Landing /> },
+      { path: "login", element: <Login /> },
+      { path: "register", element: <Register /> },
+      { path: "landing", element: <Landing /> },
+      {
+        path: "dashboard",
+        element: <DashboardLayout checkDefaultTheme={checkDefaultTheme} />,
+        children: [
+          { index: true, element: <AddJob /> },
+          { path: "alljobs", element: <AllJobs /> },
+          { path: "stats", element: <Stats /> },
+          { path: "profile", element: <Profile /> },
+          { path: "admin", element: <Admin /> },
+        ],
+      },
+    ],
+  },
+]);
+
+const App = () => {
+  return <RouterProvider router={router} />;
+};
+
+export default App;
